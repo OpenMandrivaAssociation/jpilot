@@ -121,7 +121,7 @@ cat << EOF > %{buildroot}%{_menudir}/%{name}
   section="Office/Communications/PDA" \
   title="J-Pilot" \
   longtitle="A tool for your palm pilot" \
-  icon="jpilot.png" \
+  icon="jpilot" \
   command="jpilot" \
   xdg="true"
 EOF
