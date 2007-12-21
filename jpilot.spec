@@ -89,7 +89,7 @@ sed -i -e 's,%{name}.xpm,%{name},g' %{name}.desktop
 
 %build
 %if %cvs
-./autogen.sh
+NOCONFIGURE=1 ./autogen.sh
 %endif
 %if %_lib == lib64
   %define conf_args enable_libsuffix=64
