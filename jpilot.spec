@@ -39,6 +39,9 @@ BuildRequires:	openssl-devel
 BuildRequires:	pilot-link-devel >= %{pilot_link_version}
 BuildRequires:	readline-devel
 BuildRequires:	perl-XML-Parser
+%if %cvs
+BuildRequires:	gettext-devel
+%endif
 
 %description
 J-Pilot is a desktop organizer application for Palm PDAs that runs
