@@ -41,6 +41,7 @@ BuildRequires:	readline-devel
 BuildRequires:	perl-XML-Parser
 %if %cvs
 BuildRequires:	gettext-devel
+BuildRequires:	intltool
 %endif
 
 %description
