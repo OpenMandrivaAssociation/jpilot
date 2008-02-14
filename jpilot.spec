@@ -19,6 +19,7 @@ Version:	0.99.10
 Release:	%{release}
 License:	GPLv2
 Group:		Communications
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://www.jpilot.org/
 %if %cvs
 Source0:	%{name}-%{cvs}.tar.lzma
