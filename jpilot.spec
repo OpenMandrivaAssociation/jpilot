@@ -8,7 +8,7 @@
 %if %cvs
 %define release	%mkrel 0.%cvs.1
 %else
-%define release %mkrel 1
+%define release %mkrel 2
 %endif
 
 %define pilot_link_version 0.12.0
@@ -63,7 +63,7 @@ The shared libraries required for jpilot.
 
 %package -n	%{develname}
 Summary:	Library and header file needed for jpilot plugin development
-Group:		Communications
+Group:		Development/C
 Requires:	%{libname} = %{version}
 Provides:	%{name_plugin}-devel = %{version}
 Obsoletes:	%{mklibname jpilot_plugin 0 -d} < %{version}-%{release}
