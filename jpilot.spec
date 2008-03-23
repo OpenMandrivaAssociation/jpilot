@@ -6,9 +6,9 @@
 
 %define cvs	20071220
 %if %cvs
-%define release	%mkrel 0.%cvs.2
+%define release	%mkrel 0.%cvs.3
 %else
-%define release %mkrel 2
+%define release %mkrel 3
 %endif
 
 %define pilot_link_version 0.12.0
@@ -52,7 +52,7 @@ under Linux and UNIX.  It is similar in functionality to the one that
 
 %package -n	%{libname}
 Summary:	Shared libraries for jpilot
-Group:		Communications
+Group:		System/Libraries
 
 %description -n	%{libname}
 J-Pilot is a desktop organizer application for Palm PDAs that runs
@@ -174,7 +174,8 @@ rm -rf %{buildroot}
 %doc README
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
-%{_libdir}/%{name}/plugins/*.so.*
+%{_libdir}/%{name}/plugins/*.so.%{major}
+%{_libdir}/%{name}/plugins/*.so.%{major}.*
 
 %files -n %{develname}
 %defattr(-,root,root)
