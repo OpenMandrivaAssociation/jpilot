@@ -152,10 +152,6 @@ desktop-file-install --vendor="" \
 %{clean_menus}
 %{clean_icon_cache hicolor}
 
-#%post -n %{libname} -p /sbin/ldconfig
-
-#%postun -n %{libname} -p /sbin/ldconfig
-
 %clean
 rm -rf %{buildroot}
 
