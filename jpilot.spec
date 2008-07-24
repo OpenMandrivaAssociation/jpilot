@@ -6,9 +6,9 @@
 
 %define cvs	20071220
 %if %cvs
-%define release	%mkrel 0.%cvs.3
+%define release	%mkrel 0.%cvs.4
 %else
-%define release %mkrel 3
+%define release %mkrel 1
 %endif
 
 %define pilot_link_version 0.12.0
