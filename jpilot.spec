@@ -1,9 +1,5 @@
 %define name_plugin	%{name}_plugin
 
-%define major		0
-%define libname		%mklibname %{name_plugin} %{major}
-%define develname	%mklibname %{name_plugin} -d
-
 %define cvs	20071220
 %if %cvs
 %define release	%mkrel 0.%cvs.5
@@ -13,13 +9,12 @@
 
 %define pilot_link_version 0.12.0
 
-Name:		jpilot
 Summary:	Palm pilot desktop for Linux
+Name:		jpilot
 Version:	0.99.10
 Release:	%{release}
 License:	GPLv2
 Group:		Communications
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://www.jpilot.org/
 %if %cvs
 Source0:	%{name}-%{cvs}.tar.lzma
@@ -29,10 +24,13 @@ Source0:	http://jpilot.org/%{name}-%{version}.tar.bz2
 Patch1:		jpilot-0.99.4-usbinfo.patch
 Patch2:		jpilot-0.99.1u-plugins-improvement.patch
 Patch3:		jpilot-0.99.10-lib64.patch
+Patch4:		jpilot-libtool_fixes.diff
+Patch5:		jpilot-libdir_fix.diff
 Requires:	pilot-link >= %{pilot_link_version}
-Requires:	%{libname} = %{version}
-BuildRequires:	ImageMagick
-BuildRequires:	chrpath
+Requires:	jpilot-expense
+Requires:	jpilot-keyring
+Requires:	jpilot-synctime
+BuildRequires:	imagemagick
 BuildRequires:  desktop-file-utils
 BuildRequires:	gtk2-devel
 BuildRequires:	ncurses-devel
@@ -44,38 +42,65 @@ BuildRequires:	perl-XML-Parser
 BuildRequires:	gettext-devel
 BuildRequires:	intltool
 %endif
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 J-Pilot is a desktop organizer application for Palm PDAs that runs
 under Linux and UNIX.  It is similar in functionality to the one that
 3Com distributes for a well known rampant legacy operating system.
 
-%package -n	%{libname}
-Summary:	Shared libraries for jpilot
-Group:		System/Libraries
+%package	expense
+Summary:	The expense plugin for jpilot
+Group:		Communications
+Obsoletes:	%{mklibname jpilot_plugin 0} < %{version}-%{release}
 
-%description -n	%{libname}
+%description	expense
 J-Pilot is a desktop organizer application for Palm PDAs that runs
 under Linux and UNIX.  It is similar in functionality to the one that
 3Com distributes for a well known rampant legacy operating system.
 
-The shared libraries required for jpilot.
+This package contains the expense plugin for jpilot.
 
-%package -n	%{develname}
-Summary:	Library and header file needed for jpilot plugin development
+%package	keyring
+Summary:	The keyring plugin for jpilot
+Group:		Communications
+Obsoletes:	%{mklibname jpilot_plugin 0} < %{version}-%{release}
+
+%description	keyring
+J-Pilot is a desktop organizer application for Palm PDAs that runs
+under Linux and UNIX.  It is similar in functionality to the one that
+3Com distributes for a well known rampant legacy operating system.
+
+This package contains the keyring plugin for jpilot.
+
+%package	synctime
+Summary:	The synctime plugin for jpilot
+Group:		Communications
+Obsoletes:	%{mklibname jpilot_plugin 0} < %{version}-%{release}
+
+%description	synctime
+J-Pilot is a desktop organizer application for Palm PDAs that runs
+under Linux and UNIX.  It is similar in functionality to the one that
+3Com distributes for a well known rampant legacy operating system.
+
+This package contains the synctime plugin for jpilot.
+
+%package	devel
+Summary:	Header file needed for jpilot plugin development
 Group:		Development/C
-Requires:	%{libname} = %{version}
 Provides:	%{name_plugin}-devel = %{version}
 Obsoletes:	%{mklibname jpilot_plugin 0 -d} < %{version}-%{release}
+Obsoletes:	%{mklibname jpilot_plugin -d} < %{version}-%{release}
 
-%description -n	%{develname}
+%description	devel
 J-Pilot is a desktop organizer application for Palm PDAs that runs
 under Linux and UNIX.  It is similar in functionality to the one that 
 3Com distributes for a well known rampant legacy operating system.
 
-The library and header files required for plugin development.
+The header files required for plugin development.
 
 %prep
+
 %if %cvs
 %setup -q -n %{name}
 %else
@@ -84,6 +109,8 @@ The library and header files required for plugin development.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
+%patch5 -p1
 sed -i -e 's,the Palm Pilot,Palm PDAs,g' %{name}.desktop
 sed -i -e 's,Exec=%{name},Exec=%{_bindir}/%{name},g' %{name}.desktop
 sed -i -e 's,%{name}.xpm,%{name},g' %{name}.desktop
@@ -102,20 +129,10 @@ NOCONFIGURE=1 ./autogen.sh
 
 %install
 rm -rf %{buildroot}
+
 mkdir -p %{buildroot}{%{_mandir}/man1,%{_bindir}}
-%{makeinstall}
 
-# jpilot use (almost) hardcoded plugins directory as:
-#   BASE_DIR ABILIB EPN plugins
-# which gives on a real system
-#   /usr/lib/jpilot/plugins
-# so fix plugins which have been installed in /usr/lib else.
-mkdir -p %{buildroot}/%{_libdir}/%{name}/plugins
-mv %{buildroot}/%{_libdir}/lib*.so* %{buildroot}/%{_libdir}/%{name}/plugins/
-mv %{buildroot}/%{_libdir}/lib*.la %{buildroot}/%{_libdir}/%{name}/plugins/
-
-chrpath -d %{buildroot}/%{_bindir}/%{name}*
-chrpath -d %{buildroot}/%{_libdir}/%{name}/plugins/*.so.0.*
+%makeinstall libdir=%{buildroot}/%{_libdir}/%{name}/plugins
 
 # copy empty/*.pdb in %{_datadir}/jpilot/
 mkdir -p %{buildroot}%{_datadir}/jpilot
@@ -144,6 +161,9 @@ desktop-file-install --vendor="" \
 
 %find_lang %{name}
 
+# cleanup
+rm -f %{buildroot}/%{_libdir}/%{name}/plugins/*.la
+
 %if %mdkversion < 200900
 %post
 %{update_menus}
@@ -168,19 +188,22 @@ rm -rf %{buildroot}
 %{_iconsdir}/hicolor/*/apps/%{name}.png
 %{_datadir}/applications/*
 %{_mandir}/man1/*
-
-%files -n %{libname}
-%defattr(-,root,root)
-%doc README
 %dir %{_libdir}/%{name}
 %dir %{_libdir}/%{name}/plugins
-%{_libdir}/%{name}/plugins/*.so.%{major}
-%{_libdir}/%{name}/plugins/*.so.%{major}.*
 
-%files -n %{develname}
+%files expense
+%defattr(-,root,root)
+%{_libdir}/%{name}/plugins/libexpense.so
+
+%files keyring
+%defattr(-,root,root)
+%{_libdir}/%{name}/plugins/libkeyring.so
+
+%files synctime
+%defattr(-,root,root)
+%{_libdir}/%{name}/plugins/libsynctime.so
+
+%files devel
 %defattr(-,root,root)
 %doc docs/plugin.html
-%{_libdir}/%{name}/plugins/*.so
-%{_libdir}/%{name}/plugins/*.la
 %{_includedir}/*.h
-
