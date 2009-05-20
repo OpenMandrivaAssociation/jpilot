@@ -26,6 +26,7 @@ Patch2:		jpilot-0.99.1u-plugins-improvement.patch
 Patch3:		jpilot-0.99.10-lib64.patch
 Patch4:		jpilot-libtool_fixes.diff
 Patch5:		jpilot-libdir_fix.diff
+Patch6:		jpilot-wformat.patch
 Requires:	pilot-link >= %{pilot_link_version}
 Requires:	jpilot-expense
 Requires:	jpilot-keyring
@@ -111,6 +112,7 @@ The header files required for plugin development.
 %patch3 -p1
 %patch4 -p1
 %patch5 -p1
+%patch6 -p1
 sed -i -e 's,the Palm Pilot,Palm PDAs,g' %{name}.desktop
 sed -i -e 's,Exec=%{name},Exec=%{_bindir}/%{name},g' %{name}.desktop
 sed -i -e 's,%{name}.xpm,%{name},g' %{name}.desktop
