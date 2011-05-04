@@ -5,7 +5,7 @@
 Summary:	Palm pilot desktop for Linux
 Name:		jpilot
 Version:	1.8.0
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2
 Group:		Communications
 URL:		http://www.jpilot.org/
