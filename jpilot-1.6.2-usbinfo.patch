@@ -1,0 +1,11 @@
+--- jpilot-1.6.2/sync.c~	2009-06-15 09:23:17.000000000 +0200
++++ jpilot-1.6.2/sync.c	2009-06-15 09:24:26.000000000 +0200
+@@ -395,7 +395,7 @@
+    ret = pi_bind(sd, device);
+    if (ret < 0) {
+       jp_logf(JP_LOG_WARN, "pi_bind error: %s %s\n", device, strerror(errno));
+-      jp_logf(JP_LOG_WARN, _("Check your serial port and settings\n"));
++      jp_logf(JP_LOG_WARN, _("If you use a USB pilot press the Hotsync\n button before and repush the button Sync\n"));
+       pi_close(sd);
+       return SYNC_ERROR_BIND;
+    }
