@@ -176,3 +176,129 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc docs/plugin.html
 %{_includedir}/*.h
+
+
+%changelog
+* Wed May 04 2011 Oden Eriksson <oeriksson@mandriva.com> 1.8.0-2mdv2011.0
++ Revision: 665831
+- mass rebuild
+
+* Sun Sep 05 2010 Bruno Cornec <bcornec@mandriva.org> 1.8.0-1mdv2011.0
++ Revision: 576106
+- Remove old upstream sources now useless
+- Update jpilot to upstream 1.8.0
+
+* Fri Apr 09 2010 Funda Wang <fwang@mandriva.org> 1.6.2-3mdv2010.1
++ Revision: 533332
+- rebuild
+
+* Fri Feb 26 2010 Oden Eriksson <oeriksson@mandriva.com> 1.6.2-2mdv2010.1
++ Revision: 511583
+- rebuilt against openssl-0.9.8m
+
+* Mon Jun 15 2009 Funda Wang <fwang@mandriva.org> 1.6.2-1mdv2010.0
++ Revision: 385967
+- New version 1.6.2
+
+  + Christophe Fergeau <cfergeau@mandriva.com>
+    -fix -Wformat warnings
+
+* Mon Nov 10 2008 Oden Eriksson <oeriksson@mandriva.com> 0.99.10-0.20071220.5mdv2009.1
++ Revision: 301744
+- package the plugins correctly
+- fix build (libtool fixes)
+- rebuilt against new libxcb
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+  + Pixel <pixel@mandriva.com>
+    - rpm filetriggers deprecates update_menus/update_scrollkeeper/update_mime_database/update_icon_cache/update_desktop_database/post_install_gconf_schemas
+    - remove commented ldconfig calls (won't be needed anymore anyway)
+
+* Sun Mar 23 2008 Emmanuel Andry <eandry@mandriva.org> 0.99.10-0.20071220.3mdv2008.1
++ Revision: 189637
+- Fix lib group
+- protect major
+
+* Sun Mar 23 2008 Emmanuel Andry <eandry@mandriva.org> 0.99.10-0.20071220.2mdv2008.1
++ Revision: 189601
+- Fix devel group
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - fix no-buildroot-tag
+
+* Fri Dec 21 2007 Adam Williamson <awilliamson@mandriva.org> 0.99.10-0.20071220.1mdv2008.1
++ Revision: 136103
+- use NOCONFIGURE=1 to skip configure after running autogen.sh, otherwise it fails on x86-64 as it can't find the pilot-link libs
+- cvs buildrequires intltool
+- buildrequires gettext-devel (for cvs)
+- rebuild for new era
+- new library policy
+- fd.o icons
+- correct various XDG menu issues
+- drop legacy menu
+- bump to current CVS (Debian does the same, apparently much improved over last release)
+- slightly modify descriptions
+- spec clean
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - do not hardcode icon extension
+    - kill re-definition of %%buildroot on Pixel's request
+
+
+* Fri Dec 22 2006 Christiaan Welvaart <cjw@daneel.dyndns.org>
++ 2006-12-22 13:44:42 (101484)
+- add BuildRequires: perl-XML-Parser
+
+* Wed Nov 01 2006 Stefan van der Eijk <stefan@mandriva.org>
++ 2006-11-01 20:08:43 (75070)
+fix usbinfo patch
+
+* Wed Nov 01 2006 Stefan van der Eijk <stefan@mandriva.org>
++ 2006-11-01 17:48:24 (75051)
+decompress patches
+
+* Tue Oct 31 2006 Stefan van der Eijk <stefan@mandriva.org>
++ 2006-10-31 12:33:16 (74308)
+0.99.9
+
+* Tue Oct 31 2006 Stefan van der Eijk <stefan@mandriva.org>
++ 2006-10-31 08:36:36 (74118)
+Import jpilot
+
+* Tue Sep 19 2006 Gwenole Beauchesne <gbeauchesne@mandriva.com> 0.99.8-3mdv2007.0
+- Rebuild
+
+* Wed Sep 06 2006 Frederic Crozat <fcrozat@mandriva.com> 0.99.8-2mdv2007.0
+- Patch4: fix crash at startup
+- Rebuild for pilot-link 0.12.0
+- migrate menu to XDG
+
+* Sun Jul 02 2006 Stefan van der Eijk <stefan@mandriva.org> 0.99.8-1
+- update from Cris B <cris@beebgames.com>
+  - 0.99.8
+  - switch to gtk2
+
+* Tue Jan 03 2006 Stefan van der Eijk <stefan@eijk.nu> 0.99.7-6mdk
+- Rebuild (libcrypto.so.0.9.8)
+
+* Wed May 04 2005 Stew Benedict <sbenedict@mandriva.com> 0.99.7-5mdk
+- really fix 64bit build, thx Gwenole
+
+* Wed May 04 2005 Stew Benedict <sbenedict@mandriva.com> 0.99.7-4mdk
+- fix 64bit build, mkrel
+
+* Thu Jan 20 2005 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 0.99.7-3mdk
+- rebuild for new slang
+- fix summary-ended-with-dot
+
+* Sat Aug 21 2004 Thierry Vignaud <tvignaud@mandrakesoft.com> 0.99.7-2mdk
+- fix typo in menu entry
+
+* Thu Jun 03 2004 Per Øyvind Karlsen <peroyvind@linux-mandrake.com> 0.99.7-1mdk
+- 0.99.7
+
+* Thu Feb 12 2004 David Baudens <baudens@mandrakesoft.com> 0.99.6-2mdk
+- Fix menu
+
