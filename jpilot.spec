@@ -5,7 +5,7 @@
 Summary:	Palm pilot desktop for Linux
 Name:		jpilot
 Version:	1.8.0
-Release:	%mkrel 2
+Release:	2
 License:	GPLv2
 Group:		Communications
 URL:		http://www.jpilot.org/
@@ -28,7 +28,6 @@ BuildRequires:	openssl-devel
 BuildRequires:	pilot-link-devel >= %{pilot_link_version}
 BuildRequires:	readline-devel
 BuildRequires:	perl-XML-Parser
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 J-Pilot is a desktop organizer application for Palm PDAs that runs
@@ -90,7 +89,7 @@ The header files required for plugin development.
 %patch1 -p1 -b .usbinfo
 %patch2 -p1 -b .plugins
 %patch4 -p0 -b .linkage
-#%patch5 -p0 -b .libdir
+#patch5 -p0 -b .libdir
 %patch6 -p0 -b .str
 %patch7 -p0 -b .desktop
 
@@ -100,7 +99,6 @@ export ABILIB="%_lib"
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 # copy empty/*.pdb in %{_datadir}/jpilot/
@@ -130,26 +128,7 @@ desktop-file-install --vendor="" \
 
 %find_lang %{name}
 
-# cleanup
-rm -f %{buildroot}/%{_libdir}/%{name}/plugins/*.la
-
-%if %mdkversion < 200900
-%post
-%{update_menus}
-%{update_icon_cache hicolor}
-%endif
-
-%if %mdkversion < 200900
-%postun 
-%{clean_menus}
-%{clean_icon_cache hicolor}
-%endif
-
-%clean
-rm -rf %{buildroot}
-
 %files -f %{name}.lang
-%defattr(-,root,root)
 %doc AUTHORS BUGS ChangeLog README TODO
 %doc docs/manual.html docs/jpilot-*.png docs/jpilot-*.jpg
 %{_bindir}/*
@@ -161,22 +140,17 @@ rm -rf %{buildroot}
 %dir %{_libdir}/%{name}/plugins
 
 %files expense
-%defattr(-,root,root)
 %{_libdir}/%{name}/plugins/libexpense.so
 
 %files keyring
-%defattr(-,root,root)
 %{_libdir}/%{name}/plugins/libkeyring.so
 
 %files synctime
-%defattr(-,root,root)
 %{_libdir}/%{name}/plugins/libsynctime.so
 
 %files devel
-%defattr(-,root,root)
 %doc docs/plugin.html
 %{_includedir}/*.h
-
 
 %changelog
 * Wed May 04 2011 Oden Eriksson <oeriksson@mandriva.com> 1.8.0-2mdv2011.0
