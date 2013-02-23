@@ -4,17 +4,15 @@
 
 Summary:	Palm pilot desktop for Linux
 Name:		jpilot
-Version:	1.8.0
-Release:	2
+Version:	1.8.1
+Release:	1
 License:	GPLv2
 Group:		Communications
 URL:		http://www.jpilot.org/
 Source0:	http://jpilot.org/%{name}-%{version}.tar.gz
-Patch1:		jpilot-1.6.2-usbinfo.patch
 Patch2:		jpilot-0.99.1u-plugins-improvement.patch
 Patch4:		jpilot-1.8.0-linkage.patch
 #Patch5:		jpilot-1.6.2-libdir-fix.patch
-Patch6:		jpilot-1.6.2-fix-str-fmt.patch
 Patch7:		jpilot-1.6.2-fix-desktop.patch
 Requires:	pilot-link >= %{pilot_link_version}
 Requires:	jpilot-expense
@@ -86,11 +84,9 @@ The header files required for plugin development.
 
 %prep
 %setup -q
-%patch1 -p1 -b .usbinfo
 %patch2 -p1 -b .plugins
 %patch4 -p0 -b .linkage
 #patch5 -p0 -b .libdir
-%patch6 -p0 -b .str
 %patch7 -p0 -b .desktop
 
 %build
