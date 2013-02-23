@@ -1,6 +1,7 @@
 %define name_plugin	%{name}_plugin
 
 %define pilot_link_version 0.12.5
+%define	_disable_ld_no_undefined 1
 
 Summary:	Palm pilot desktop for Linux
 Name:		jpilot
