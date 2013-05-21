@@ -1,5 +1,5 @@
---- Expense/Makefile.am~	2010-09-05 12:58:26.007557898 +0200
-+++ Expense/Makefile.am	2010-09-05 12:59:05.619558157 +0200
+--- ./Expense/Makefile.am~	2010-09-05 12:58:26.007557898 +0200
++++ ./Expense/Makefile.am	2010-09-05 12:59:05.619558157 +0200
 @@ -7,7 +7,7 @@
  lib_LTLIBRARIES = libexpense.la
  libexpense_la_SOURCES = expense.c
@@ -9,8 +9,8 @@
  libexpense_la_LIBADD = @GTK_LIBS@
  
  endif
---- Expense/Makefile.in~	2010-09-05 13:00:47.687719490 +0200
-+++ Expense/Makefile.in	2010-09-05 13:01:26.824576660 +0200
+--- ./Expense/Makefile.in~	2010-09-05 13:00:47.687719490 +0200
++++ ./Expense/Makefile.in	2010-09-05 13:01:26.824576660 +0200
 @@ -248,7 +248,7 @@
  @MAKE_EXPENSE_TRUE@lib_LTLIBRARIES = libexpense.la
  @MAKE_EXPENSE_TRUE@libexpense_la_SOURCES = expense.c
@@ -20,8 +20,8 @@
  @MAKE_EXPENSE_TRUE@libexpense_la_LIBADD = @GTK_LIBS@
  all: all-am
  
---- KeyRing/Makefile.am~	2010-09-05 13:01:47.093600820 +0200
-+++ KeyRing/Makefile.am	2010-09-05 13:02:10.715599302 +0200
+--- ./KeyRing/Makefile.am~	2010-09-05 13:01:47.093600820 +0200
++++ ./KeyRing/Makefile.am	2010-09-05 13:02:10.715599302 +0200
 @@ -9,7 +9,7 @@
  lib_LTLIBRARIES = libkeyring.la
  libkeyring_la_SOURCES = keyring.c
@@ -31,8 +31,8 @@
  libkeyring_la_LIBADD = @OPENSSL_LIBS@ @GTK_LIBS@ @LIBGCRYPT_LIBS@
  
  endif
---- KeyRing/Makefile.in~	2010-09-05 13:02:27.493640991 +0200
-+++ KeyRing/Makefile.in	2010-09-05 13:02:40.051659949 +0200
+--- ./KeyRing/Makefile.in~	2010-09-05 13:02:27.493640991 +0200
++++ ./KeyRing/Makefile.in	2010-09-05 13:02:40.051659949 +0200
 @@ -249,7 +249,7 @@
  @MAKE_KEYRING_TRUE@lib_LTLIBRARIES = libkeyring.la
  @MAKE_KEYRING_TRUE@libkeyring_la_SOURCES = keyring.c
@@ -42,8 +42,8 @@
  @MAKE_KEYRING_TRUE@libkeyring_la_LIBADD = @OPENSSL_LIBS@ @GTK_LIBS@ @LIBGCRYPT_LIBS@
  all: all-am
  
---- SyncTime/Makefile.am~	2010-09-05 13:02:52.664869160 +0200
-+++ SyncTime/Makefile.am	2010-09-05 13:03:01.009733583 +0200
+--- ./SyncTime/Makefile.am~	2010-09-05 13:02:52.664869160 +0200
++++ ./SyncTime/Makefile.am	2010-09-05 13:03:01.009733583 +0200
 @@ -7,7 +7,7 @@
  lib_LTLIBRARIES = libsynctime.la
  libsynctime_la_SOURCES = synctime.c
@@ -53,8 +53,8 @@
  libsynctime_la_LIBADD = @GTK_LIBS@
  
  endif
---- SyncTime/Makefile.in~	2010-09-05 13:03:10.677888442 +0200
-+++ SyncTime/Makefile.in	2010-09-05 13:03:19.261559264 +0200
+--- ./SyncTime/Makefile.in~	2010-09-05 13:03:10.677888442 +0200
++++ ./SyncTime/Makefile.in	2010-09-05 13:03:19.261559264 +0200
 @@ -248,7 +248,7 @@
  @MAKE_SYNCTIME_TRUE@lib_LTLIBRARIES = libsynctime.la
  @MAKE_SYNCTIME_TRUE@libsynctime_la_SOURCES = synctime.c
