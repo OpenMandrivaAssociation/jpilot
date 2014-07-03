@@ -1,13 +1,13 @@
-%define	_disable_ld_no_undefined 1
+%define _disable_ld_no_undefined 1
 
-%define name_plugin	%{name}_plugin
+%define name_plugin %{name}_plugin
 %define pilot_link_version 0.12.5
 
 Summary:	Palm pilot desktop for Linux
 Name:		jpilot
-Version:	1.8.1
-Release:	6
-License:	GPLv2
+Version:	1.8.2
+Release:	1
+License:	GPLv2+
 Group:		Communications
 Url:		http://www.jpilot.org/
 Source0:	http://jpilot.org/%{name}-%{version}.tar.gz
@@ -34,55 +34,84 @@ J-Pilot is a desktop organizer application for Palm PDAs that runs
 under Linux and UNIX.  It is similar in functionality to the one that
 3Com distributes for a well known rampant legacy operating system.
 
-%package	expense
+%files -f %{name}.lang
+%doc AUTHORS BUGS ChangeLog README TODO
+%doc docs/manual.html docs/jpilot-*.png docs/jpilot-*.jpg
+%{_bindir}/*
+%{_datadir}/%{name}
+%{_iconsdir}/hicolor/*/apps/%{name}.png
+%{_datadir}/applications/*
+%{_mandir}/man1/*
+%dir %{_libdir}/%{name}
+%dir %{_libdir}/%{name}/plugins
+
+#----------------------------------------------------------------------------
+
+%package expense
 Summary:	The expense plugin for jpilot
 Group:		Communications
-Obsoletes:	%{mklibname jpilot_plugin 0} < %{version}-%{release}
 
-%description	expense
+%description expense
 J-Pilot is a desktop organizer application for Palm PDAs that runs
 under Linux and UNIX.  It is similar in functionality to the one that
 3Com distributes for a well known rampant legacy operating system.
 
 This package contains the expense plugin for jpilot.
 
-%package	keyring
+%files expense
+%{_libdir}/%{name}/plugins/libexpense.so
+
+#----------------------------------------------------------------------------
+
+%package keyring
 Summary:	The keyring plugin for jpilot
 Group:		Communications
-Obsoletes:	%{mklibname jpilot_plugin 0} < %{version}-%{release}
 
-%description	keyring
+%description keyring
 J-Pilot is a desktop organizer application for Palm PDAs that runs
 under Linux and UNIX.  It is similar in functionality to the one that
 3Com distributes for a well known rampant legacy operating system.
 
 This package contains the keyring plugin for jpilot.
 
-%package	synctime
+%files keyring
+%{_libdir}/%{name}/plugins/libkeyring.so
+
+#----------------------------------------------------------------------------
+
+%package synctime
 Summary:	The synctime plugin for jpilot
 Group:		Communications
-Obsoletes:	%{mklibname jpilot_plugin 0} < %{version}-%{release}
 
-%description	synctime
+%description synctime
 J-Pilot is a desktop organizer application for Palm PDAs that runs
 under Linux and UNIX.  It is similar in functionality to the one that
 3Com distributes for a well known rampant legacy operating system.
 
 This package contains the synctime plugin for jpilot.
 
-%package	devel
+%files synctime
+%{_libdir}/%{name}/plugins/libsynctime.so
+
+#----------------------------------------------------------------------------
+
+%package devel
 Summary:	Header file needed for jpilot plugin development
 Group:		Development/C
-Provides:	%{name_plugin}-devel = %{version}
-Obsoletes:	%{mklibname jpilot_plugin 0 -d} < %{version}-%{release}
-Obsoletes:	%{mklibname jpilot_plugin -d} < %{version}-%{release}
+Provides:	%{name_plugin}-devel = %{EVRD}
 
-%description	devel
+%description devel
 J-Pilot is a desktop organizer application for Palm PDAs that runs
 under Linux and UNIX.  It is similar in functionality to the one that 
 3Com distributes for a well known rampant legacy operating system.
 
 The header files required for plugin development.
+
+%files devel
+%doc docs/plugin.html
+%{_includedir}/*.h
+
+#----------------------------------------------------------------------------
 
 %prep
 %setup -q
@@ -123,28 +152,4 @@ desktop-file-install --vendor="" \
 	%{buildroot}%{_datadir}/applications/*
 
 %find_lang %{name}
-
-%files -f %{name}.lang
-%doc AUTHORS BUGS ChangeLog README TODO
-%doc docs/manual.html docs/jpilot-*.png docs/jpilot-*.jpg
-%{_bindir}/*
-%{_datadir}/%{name}
-%{_iconsdir}/hicolor/*/apps/%{name}.png
-%{_datadir}/applications/*
-%{_mandir}/man1/*
-%dir %{_libdir}/%{name}
-%dir %{_libdir}/%{name}/plugins
-
-%files expense
-%{_libdir}/%{name}/plugins/libexpense.so
-
-%files keyring
-%{_libdir}/%{name}/plugins/libkeyring.so
-
-%files synctime
-%{_libdir}/%{name}/plugins/libsynctime.so
-
-%files devel
-%doc docs/plugin.html
-%{_includedir}/*.h
 
