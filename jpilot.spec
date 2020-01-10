@@ -115,7 +115,7 @@ The header files required for plugin development.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 export ABILIB="%{_lib}"
