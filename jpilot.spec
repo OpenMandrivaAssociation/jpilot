@@ -9,7 +9,7 @@ Version:	1.8.2
 Release:	5
 License:	GPLv2+
 Group:		Communications
-Url:		http://www.jpilot.org/
+Url:		https://www.jpilot.org/
 Source0:	http://jpilot.org/%{name}-%{version}.tar.gz
 Patch2:		jpilot-0.99.1u-plugins-improvement.patch
 Patch4:		jpilot-1.8.0-linkage.patch
